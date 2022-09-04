@@ -17,7 +17,7 @@ func _physics_process(delta):
 	var newRow = row.instance()
 	newRow.position.y = 0 - newRow.boxHeight
 	newRow.lane = (randi() % 4) + 1
-	get_parent().add_child(newRow)
+	get_parent().get_node('Notes').add_child(newRow)
 	coolingDown = true
 	emit_signal('row_created', newRow)
 

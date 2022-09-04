@@ -47,6 +47,8 @@ shape = SubResource( 2 )
 wait_time = 0.114
 autostart = true
 
+[node name="Notes" type="Node2D" parent="."]
+
 [node name="TouchInputs" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
@@ -73,6 +75,19 @@ shape = SubResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TouchInputs/Lane4"]
 position = Vector2( 364, 300 )
 shape = SubResource( 6 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="."]
+margin_left = 64.0
+margin_right = 104.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
 
 [connection signal="row_created" from="Spawner" to="." method="_on_Spawner_row_created"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
