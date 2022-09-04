@@ -29,3 +29,19 @@ func _on_Spawner_row_created(newRow):
 	rows.push_back(newRow)
 	for row in rows:
 		print(row.lane)
+
+
+func _on_TouchInputs_lane1_clicked():
+	playNote(1)
+
+
+func _on_TouchInputs_lane2_clicked():
+	playNote(2)
+
+
+func _on_TouchInputs_lane3_clicked():
+	playNote(3)	
+
+
+func _on_TouchInputs_lane4_clicked():
+	playNote(4);

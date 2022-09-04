@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/psd/bg.jpg" type="Texture" id=1]
+[ext_resource path="res://TouchInputs.gd" type="Script" id=2]
 [ext_resource path="res://PianoTiles.gd" type="Script" id=3]
 [ext_resource path="res://Spawner.gd" type="Script" id=4]
 
@@ -9,6 +10,18 @@ extents = Vector2( 208, 20 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 208, 32 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 52, 300 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 52, 300 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 52, 300 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 52, 300 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -27,12 +40,47 @@ shape = SubResource( 1 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
-position = Vector2( 208, -32 )
+position = Vector2( 208, -40 )
 shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="Spawner"]
 wait_time = 0.114
 autostart = true
 
+[node name="TouchInputs" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Lane1" type="Area2D" parent="TouchInputs"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchInputs/Lane1"]
+position = Vector2( 52, 300 )
+shape = SubResource( 3 )
+
+[node name="Lane2" type="Area2D" parent="TouchInputs"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchInputs/Lane2"]
+position = Vector2( 156, 300 )
+shape = SubResource( 4 )
+
+[node name="Lane3" type="Area2D" parent="TouchInputs"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchInputs/Lane3"]
+position = Vector2( 260, 300 )
+shape = SubResource( 5 )
+
+[node name="Lane4" type="Area2D" parent="TouchInputs"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchInputs/Lane4"]
+position = Vector2( 364, 300 )
+shape = SubResource( 6 )
+
 [connection signal="row_created" from="Spawner" to="." method="_on_Spawner_row_created"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
+[connection signal="lane1_clicked" from="TouchInputs" to="." method="_on_TouchInputs_lane1_clicked"]
+[connection signal="lane2_clicked" from="TouchInputs" to="." method="_on_TouchInputs_lane2_clicked"]
+[connection signal="lane3_clicked" from="TouchInputs" to="." method="_on_TouchInputs_lane3_clicked"]
+[connection signal="lane4_clicked" from="TouchInputs" to="." method="_on_TouchInputs_lane4_clicked"]
+[connection signal="input_event" from="TouchInputs/Lane1" to="TouchInputs" method="_on_Lane1_input_event"]
+[connection signal="input_event" from="TouchInputs/Lane2" to="TouchInputs" method="_on_Lane2_input_event"]
+[connection signal="input_event" from="TouchInputs/Lane3" to="TouchInputs" method="_on_Lane3_input_event"]
+[connection signal="input_event" from="TouchInputs/Lane4" to="TouchInputs" method="_on_Lane4_input_event"]
