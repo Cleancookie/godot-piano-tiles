@@ -1,5 +1,6 @@
 extends Node2D
 
+signal score_changed
 var rows = []
 var score = 0
 
@@ -21,6 +22,7 @@ func playNote(lane):
 		score = score + 1
 		rows[0].removeRow()
 		rows.pop_front()
+		emit_signal('score_changed', score)
 	else:
 		print('wrong lane played')
 
@@ -30,18 +32,14 @@ func _on_Spawner_row_created(newRow):
 	for row in rows:
 		print(row.lane)
 
-
 func _on_TouchInputs_lane1_clicked():
 	playNote(1)
-
 
 func _on_TouchInputs_lane2_clicked():
 	playNote(2)
 
-
 func _on_TouchInputs_lane3_clicked():
 	playNote(3)	
-
 
 func _on_TouchInputs_lane4_clicked():
 	playNote(4);

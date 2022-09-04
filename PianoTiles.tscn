@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/psd/bg.jpg" type="Texture" id=1]
 [ext_resource path="res://TouchInputs.gd" type="Script" id=2]
@@ -22,6 +22,13 @@ extents = Vector2( 52, 300 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 52, 300 )
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Label
+
+func _on_Main_score_changed(new_score):
+	self.text = str(new_score) 
+"
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -88,7 +95,9 @@ margin_right = 104.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
+script = SubResource( 7 )
 
+[connection signal="score_changed" from="." to="ScoreValue" method="_on_Main_score_changed"]
 [connection signal="row_created" from="Spawner" to="." method="_on_Spawner_row_created"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="lane1_clicked" from="TouchInputs" to="." method="_on_TouchInputs_lane1_clicked"]
