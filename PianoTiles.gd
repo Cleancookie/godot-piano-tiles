@@ -3,6 +3,7 @@ extends Node2D
 signal score_changed
 var rows = []
 var score = 0
+export var wrong_note_cooldown = false
 
 func _ready():
 	score = 0
@@ -19,19 +20,21 @@ func _input(event):
 		playNote(4)
 
 func playNote(lane):
+	if rows == [] || wrong_note_cooldown:
+		return
+		
 	if rows[0].lane == lane:
 		score = score + 1
 		rows[0].removeRow()
 		rows.pop_front()
 		emit_signal('score_changed', score)
 	else:
-		print('wrong lane played')
+		wrong_note_cooldown = true
+		$HBoxContainer/WrongNoteWarning.visible = true
+		$WrongNoteCooldown.start()
 
 func _on_Spawner_row_created(newRow):
-	print('new row added')
 	rows.push_back(newRow)
-	for row in rows:
-		print(row.lane)
 
 func _on_TouchInputs_lane1_clicked():
 	playNote(1)
@@ -44,3 +47,7 @@ func _on_TouchInputs_lane3_clicked():
 
 func _on_TouchInputs_lane4_clicked():
 	playNote(4);
+
+func _on_WrongNoteCooldown_timeout():
+	wrong_note_cooldown = false
+	$HBoxContainer/WrongNoteWarning.visible = false

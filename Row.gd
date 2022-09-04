@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var lane = 1
-export var speed = 1600
+export var speed = 1200
 var laneWidth = 104
 var boxHeight = 192
 var screen = null
