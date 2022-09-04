@@ -6,6 +6,7 @@ var score = 0
 
 func _ready():
 	score = 0
+	var key = JavaScript.eval('window.player_key')
 
 func _input(event):
 	if event.is_action_pressed("note_1"):
